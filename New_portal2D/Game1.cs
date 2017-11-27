@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using New_portal2D.Content;
+using Portal2D.Models;
 
 namespace New_portal2D
 { 
@@ -10,9 +11,10 @@ namespace New_portal2D
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _wallTexture, _playerTexture;
+        private Texture2D _wallTexture, _playerTexture, _portalTexture;
         private Board _board;
         private Player _player;
+        private Portal entryPortal, exitPortal;
         //private Random _rnd = new Random();
 
         public Game1()
@@ -31,11 +33,16 @@ namespace New_portal2D
         {
             // Cria novo SpriteBatch, para desenhar texturas
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Desenha texturas do player e parede
+            // Desenha texturas do player, parede e portal
             _wallTexture = Content.Load<Texture2D>("wall_2");
             _playerTexture = Content.Load<Texture2D>("player_2");
             _board = new Board(_spriteBatch, _wallTexture, 15, 10);
             _player = new Player(_playerTexture, new Vector2(80, 80), _spriteBatch);
+            _portalTexture = Content.Load<Texture2D>("portal");
+            entryPortal = new Portal(_portalTexture, new Vector2(-900, -900), _spriteBatch);
+            exitPortal = new Portal(_portalTexture, new Vector2(-800, -800), _spriteBatch);
+            entryPortal.Initialize(false);
+            exitPortal.Initialize(true);
         }
 
         // === UPDATE ===

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using New_portal2D.Content;
 using Portal2D.Models;
 using System;
 
@@ -13,10 +14,7 @@ namespace Portal2D.Util
         {
             Rectangle rectangle1, rectangle2;
 
-            rectangle1 = new Rectangle((int)player.GetPlayerPosition.X,
-                (int)player.GetPlayerPosition.Y,
-                player.GetPlayerWidth + plusInAxisX,
-                player.GetPlayerHeight);
+            rectangle1 = player.Bounds;
 
 
             for (int i = 0; i < wall.Length; i++)
@@ -45,10 +43,7 @@ namespace Portal2D.Util
         {
             Rectangle rectangle1, rectangle2;
 
-            rectangle1 = new Rectangle((int)player.GetPlayerPosition.X,
-                (int)player.GetPlayerPosition.Y,
-                player.GetPlayerWidth,
-                player.GetPlayerHeight + plusInAxisY);
+            rectangle1 = player.Bounds;
 
 
             for (int i = 0; i < wall.Length; i++)

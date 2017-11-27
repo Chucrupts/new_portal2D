@@ -1,18 +1,22 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using New_portal2D;
 
 namespace Portal2D.Models
 {
-    class Portal
+    class Portal : Sprite
     {
-        // Parâmetros
-        //Posição do portal iniciada no canto superior esquerdo da tela
+        // Parâmetros   public Vector2 Movement { get; set; }
         private Vector2 portalPosition;
         // Sprite do portal
         private Texture2D portalTexture;
         // É portal de saida? Foi movido?
         private Boolean exit, moved;
+
+        public Portal(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
+            : base(texture, position, spritebatch)
+        { }
 
         // setters and getters
         // Altera a posição do portal
@@ -51,10 +55,8 @@ namespace Portal2D.Models
 
         // Métodos para tempo de jogo.
 
-        public void Initialize(Texture2D texture, Vector2 position, Boolean exit)
+        public void Initialize(Boolean exit)
         {
-            SetPortalTexture(texture);
-            SetPortalPosition(position);
             SetPortalExit(exit);
             SetPortalMoved(false);
         }

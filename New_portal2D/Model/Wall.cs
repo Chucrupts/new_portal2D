@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using New_portal2D;
 
 namespace Portal2D.Models
 {
-    class Wall
+    class Wall : Sprite
     {
         // Parâmetros
         //Posição do bloco iniciada no canto superior esquerdo da tela
@@ -51,13 +52,9 @@ namespace Portal2D.Models
         // Retorna o atributo sólido do bloco
         public Boolean GetWallSolid => solid;
 
-        public Wall(Texture2D wallTexture)
-        {
-            SetWallTexture(wallTexture);
-            SetWallPosition(Vector2.Zero);
-            SetWallPortable(true);
-            SetWallSolid(true);
-        }
+        public Wall(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
+            : base(texture, position, spritebatch)
+        { }
 
 
         public void Initialize(Vector2 wallPosition,Boolean portable, Boolean solid)

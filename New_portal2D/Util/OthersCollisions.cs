@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Portal2D.Models;
+using New_portal2D.Content;
 
 namespace Portal2D.Util
 {
@@ -15,18 +15,18 @@ namespace Portal2D.Util
             if (sense < 0)
             {
                 limit = 960;
-                increase = player.GetPlayerWidth;
+                increase = player.Texture.Width;
             }
             else
             {
                 limit = 0;
-                increase = -1 * player.GetPlayerWidth;
+                increase = -1 * player.Texture.Width;
             }
                 
 
             {
 
-                for (int i = (int)x1; i < limit; i += player.GetPlayerWidth)
+                for (int i = (int)x1; i < limit; i += increase)
                 {
 
                     testPoint.X = i;

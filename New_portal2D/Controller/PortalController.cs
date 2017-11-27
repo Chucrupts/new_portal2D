@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Portal2D.Models;
 using Microsoft.Xna.Framework.Input;
 using Portal2D.Util;
+using New_portal2D.Content;
 
 namespace Portal2D.Controller
 {
@@ -13,35 +14,23 @@ namespace Portal2D.Controller
         {
             Rectangle rectangle1, rectangle2, rectangle3;
 
-            rectangle1 = new Rectangle((int)player.GetPlayerPosition.X,
-                (int)player.GetPlayerPosition.Y,
-                player.GetPlayerWidth,
-                player.GetPlayerHeight);
-
-
-            rectangle2 = new Rectangle((int)entryPortal.GetPortalPosition.X,
-                (int)entryPortal.GetPortalPosition.Y,
-                entryPortal.GetPortalWidth,
-                entryPortal.GetPortalHeight);
-
-            rectangle3 = new Rectangle((int)exitPortal.GetPortalPosition.X,
-                (int)exitPortal.GetPortalPosition.Y,
-                exitPortal.GetPortalWidth,
-                exitPortal.GetPortalHeight);
+            rectangle1 = player.Bounds;
+            rectangle2 = entryPortal.Bounds;
+            rectangle3 = exitPortal.Bounds;
 
             // Se estiver colidindo com o portal de entrada
-            if (rectangle1.Intersects(rectangle2) /*&& entryPortal.GetPortalMoved == true*/)
+            if (rectangle1.Intersects(rectangle2) && exitPortal.GetPortalMoved == true)
             {
-                player.SetPlayerPosition(exitPortal.GetPortalPosition /* + new Vector2(
-                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/);
+                player.Position = exitPortal.GetPortalPosition /* + new Vector2(
+                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/;
 
             }
 
             // Se estiver colidindo com o portal de saida
-            if (rectangle1.Intersects(rectangle3) /*&& exitPortal.GetPortalMoved == true*/)
+            if (rectangle1.Intersects(rectangle3) && entryPortal.GetPortalMoved == true)
             {
-                player.SetPlayerPosition(entryPortal.GetPortalPosition /* + new Vector2(
-                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/);
+                player.Position = entryPortal.GetPortalPosition /* + new Vector2(
+                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/;
 
             } //Nessa parte da some de vetores talvez seja melhor somar o resultado da mutiplicação
               //entre o sinal da velocidade do player com o tamanho da largura, acho que vai evitar bug
@@ -72,8 +61,8 @@ namespace Portal2D.Controller
             }
 
             // x1 e y1 são as coordenadas de um dos pontos da reta
-            float x1 = player.GetPlayerPosition.X + player.GetPlayerWidth/2;
-            float y1 = player.GetPlayerPosition.Y + player.GetPlayerHeight/2;
+            float x1 = player.Position.X + player.Texture.Width/2;
+            float y1 = player.Position.Y + player.Texture.Height/2;
 
             // x2 e y2 São as coordenadas do segundo ponto
             float x2 = Mouse.GetState().X;
