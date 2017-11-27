@@ -52,6 +52,7 @@ namespace New_portal2D
         {
 
             KeyboardState state = Keyboard.GetState();
+            IsMouseVisible = true;
             if (state.IsKeyDown(Keys.R)) { RestartGame(); }
             if (state.IsKeyDown(Keys.Escape)) { Exit(); }
         }
