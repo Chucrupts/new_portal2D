@@ -14,10 +14,6 @@ namespace Portal2D.Models
         // É portal de saida? Foi movido?
         private Boolean exit, moved;
 
-        public Portal(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
-            : base(texture, position, spritebatch)
-        { }
-
         // setters and getters
         // Altera a posição do portal
         public void SetPortalPosition(Vector2 portalPosition)
@@ -55,25 +51,11 @@ namespace Portal2D.Models
 
         // Métodos para tempo de jogo.
 
-        public void Initialize(Boolean exit)
+        public Portal(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Boolean exit)
+            : base(texture, position, spritebatch)
         {
             SetPortalExit(exit);
             SetPortalMoved(false);
-        }
-
-
-
-        public void Update()
-        {
-
-        }
-
-
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(portalTexture, portalPosition, null, Color.White, 0f, Vector2.Zero, 1f,
-                SpriteEffects.None, 0f);
         }
 
     }

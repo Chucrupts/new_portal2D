@@ -4,18 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using New_portal2D.Content;
 using Portal2D.Models;
+using Portal2D.Controller;
 
 namespace New_portal2D
-{ 
+{
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _wallTexture, _playerTexture, _portalTexture;
-        private Board _board;
+        private Texture2D _wallTexture, _playerTexture, _backTexture, _portal_1Texture, _portal_2Texture;
+        private Board _board, _back;
         private Player _player;
         private Portal entryPortal, exitPortal;
-        //private Random _rnd = new Random();
+        private PortalController pc;
 
         public Game1()
         {
@@ -25,24 +26,28 @@ namespace New_portal2D
             _graphics.PreferredBackBufferWidth = 960;
             _graphics.PreferredBackBufferHeight = 640;
             // Tenta centralizar a tela
-            this.Window.Position = new Point(800, 400);
+            this.Window.Position = new Point(200, 20);
         }
 
         // === LOAD ===
         protected override void LoadContent()
         {
+            MouseState mouseState = Mouse.GetState();
             // Cria novo SpriteBatch, para desenhar texturas
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Desenha texturas do player, parede e portal
+            // Desenha texturas do player e parede
             _wallTexture = Content.Load<Texture2D>("wall_2");
             _playerTexture = Content.Load<Texture2D>("player_2");
+            _backTexture = Content.Load<Texture2D>("back");
+            _portal_2Texture = Content.Load<Texture2D>("portal_2");
+            _portal_1Texture = Content.Load<Texture2D>("portal_1");
+            //_sprite = new Sprite(_playerTexture, new Vector2(mouseState.X, mouseState.Y), _spriteBatch);
+            _back = new Board(_spriteBatch, _backTexture, 15, 10, true);
             _board = new Board(_spriteBatch, _wallTexture, 15, 10);
+            entryPortal = new Portal(_portal_2Texture, new Vector2(192, 512), _spriteBatch, false);
+            exitPortal = new Portal(_portal_1Texture, new Vector2(640, 64), _spriteBatch, true);
             _player = new Player(_playerTexture, new Vector2(80, 80), _spriteBatch);
-            _portalTexture = Content.Load<Texture2D>("portal");
-            entryPortal = new Portal(_portalTexture, new Vector2(-900, -900), _spriteBatch);
-            exitPortal = new Portal(_portalTexture, new Vector2(-800, -800), _spriteBatch);
-            entryPortal.Initialize(false);
-            exitPortal.Initialize(true);
+            pc = new PortalController();
         }
 
         // === UPDATE ===
@@ -50,6 +55,7 @@ namespace New_portal2D
         {
             // Player update
             _player.Update(gameTime);
+            pc.CollisionWithPlayer(gameTime, _player, entryPortal, exitPortal);
             base.Update(gameTime);
             CheckKeyboard();
         }
@@ -57,7 +63,6 @@ namespace New_portal2D
         // Atalhos do teclado
         private void CheckKeyboard()
         {
-
             KeyboardState state = Keyboard.GetState();
             IsMouseVisible = true;
             if (state.IsKeyDown(Keys.R)) { RestartGame(); }
@@ -84,7 +89,11 @@ namespace New_portal2D
             GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
             base.Draw(gameTime);
+            //_sprite.Draw();
+            _back.Draw();
             _board.Draw();
+            entryPortal.Draw();
+            exitPortal.Draw();
             _player.Draw();
             _spriteBatch.End();
         }

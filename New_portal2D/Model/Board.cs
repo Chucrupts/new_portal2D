@@ -26,6 +26,25 @@ namespace New_portal2D
             Board.CurrentBoard = this;
         }
 
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, int columns, int rows, Boolean zoas)
+        {
+            Columns = columns;
+            Rows = rows;
+            TileTexture = tileTexture;
+            SpriteBatch = spritebatch;
+            Tiles = new Tile[Columns, Rows];
+            for (int x = 0; x < Columns; x++)
+            {
+                for (int y = 0; y < Rows; y++)
+                {
+                    Vector2 tilePosition =
+                        new Vector2(x * tileTexture.Width, y * tileTexture.Height);
+                    Tiles[x, y] =
+                        new Tile(tileTexture, tilePosition, spritebatch, true);
+                }
+            }
+        }
+
         public void CreateNewBoard()
         {
             InitializeAllTilesAndBlockSomeRandomly();
@@ -36,6 +55,21 @@ namespace New_portal2D
         private void SetTopLeftTileUnblocked()
         {
             Tiles[1, 1].IsBlocked = false;
+            Tiles[2, 1].IsBlocked = false;
+            Tiles[1, 2].IsBlocked = false;
+            Tiles[2, 2].IsBlocked = false;
+            Tiles[3, 8].IsBlocked = false; // Tile entryPortal
+            Tiles[10, 1].IsBlocked = false; // Tile exitPortal
+            Tiles[2, 7].IsBlocked = false;  // 5 Tiles em volta do entryPortal
+            Tiles[2, 8].IsBlocked = false;
+            Tiles[3, 7].IsBlocked = false;
+            Tiles[4, 7].IsBlocked = false;
+            Tiles[4, 8].IsBlocked = false;
+            Tiles[9, 1].IsBlocked = false; //5 Tiles em volta do exitPortal
+            Tiles[9, 2].IsBlocked = false;
+            Tiles[10, 2].IsBlocked = false;
+            Tiles[11, 1].IsBlocked = false;
+            Tiles[11, 2].IsBlocked = false;
         }
 
         private void InitializeAllTilesAndBlockSomeRandomly()

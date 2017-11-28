@@ -25,8 +25,8 @@ namespace New_portal2D.Content
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.A)) { Movement -= Vector2.UnitX * .5f; }
-            if (keyboardState.IsKeyDown(Keys.D)) { Movement += Vector2.UnitX; }
+            if (keyboardState.IsKeyDown(Keys.A)) { Movement -= Vector2.UnitX ; }
+            if (keyboardState.IsKeyDown(Keys.D)) { Movement += Vector2.UnitX ; }
             if (keyboardState.IsKeyDown(Keys.Space) && IsOnFirmGround()) { Movement = -Vector2.UnitY * 20; }
         }
 

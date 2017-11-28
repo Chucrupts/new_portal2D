@@ -9,33 +9,43 @@ namespace Portal2D.Controller
 {
     class PortalController
     {
-        public void CollisionWithPlayer(Player player, Portal entryPortal, Portal exitPortal)
+        public void CollisionWithPlayer(GameTime gameTime, Player player, Portal entryPortal, Portal exitPortal)
 
         {
-            Rectangle rectangle1, rectangle2, rectangle3;
-
-            rectangle1 = player.Bounds;
-            rectangle2 = entryPortal.Bounds;
-            rectangle3 = exitPortal.Bounds;
-
+            // A parte comentada dentro do IF é para quando o portal não for instanciado.
             // Se estiver colidindo com o portal de entrada
-            if (rectangle1.Intersects(rectangle2) && exitPortal.GetPortalMoved == true)
+            if (player.Bounds.Intersects(entryPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& exitPortal.GetPortalMoved == true*/)
             {
-                player.Position = exitPortal.GetPortalPosition /* + new Vector2(
-                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/;
+                player.Position = new Vector2(576, 64);
+                    //new Vector2 (exitPortal.GetPortalPosition.X + (Math.Sign(player.Movement.X) * exitPortal.Texture.Width) + Math.Sign(player.Movement.X),
+                        //exitPortal.GetPortalPosition.Y);
 
+            }
+            else if (player.Bounds.Intersects(entryPortal.Bounds) && Math.Sign(player.Movement.X) == 0)
+            {
+                player.Position = new Vector2(exitPortal.GetPortalPosition.X,
+                        exitPortal.GetPortalPosition.Y + Math.Sign(player.Movement.Y) + Math.Sign(player.Movement.Y) * player.Texture.Height);
             }
 
             // Se estiver colidindo com o portal de saida
-            if (rectangle1.Intersects(rectangle3) && entryPortal.GetPortalMoved == true)
+            if (player.Bounds.Intersects(exitPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& entryPortal.GetPortalMoved == true*/)
             {
-                player.Position = entryPortal.GetPortalPosition /* + new Vector2(
-                                         player.GetPlayerXspeed, player.GetPlayerYspeed)*/;
 
-            } //Nessa parte da some de vetores talvez seja melhor somar o resultado da mutiplicação
-              //entre o sinal da velocidade do player com o tamanho da largura, acho que vai evitar bug
+                player.Position = new Vector2(entryPortal.GetPortalPosition.X + (Math.Sign(player.Movement.X) * player.Texture.Width) + Math.Sign(player.Movement.X),
+                        entryPortal.GetPortalPosition.Y);
+
+            }
+            else if (player.Bounds.Intersects(exitPortal.Bounds) && Math.Sign(player.Movement.X) == 0)
+            {
+                player.Position = new Vector2(entryPortal.GetPortalPosition.X,
+                        entryPortal.GetPortalPosition.Y + Math.Sign(player.Movement.Y) + Math.Sign(player.Movement.Y) * player.Texture.Height);
+            }
+            
 
         }
+
+
+
 
         /* A função abaixo cria a reta entre o centro do player e o ponto onde ele clicou e****
         ** posteriormente checa se esta reta colide com alguma parede, para instaciar o portal*/
@@ -71,11 +81,13 @@ namespace Portal2D.Controller
             // m é a inclinação da reta
             float  m = (y2 - y1) / (x2 - x1);
 
-            // k é uma constante que será utilizada no cálculo da posição Y para cada valor
-            // de X substituido na equação da reta.
-            // A equação da reta é obtida a partir da fórmula:  Y - Y1 = m . (X - X1)
-            // De onde:  Y = mX - mX1 -(-Y1) --> Y = mX -mX1 + Y1    
-            // logo, Y = mX + k, onde k = -mX1 + Y1
+            /********************************************************************************* 
+            ** k é uma constante que será utilizada no cálculo da posição Y para cada valor **
+            ** de X substituido na equação da reta.                                         **
+            ** A equação da reta é obtida a partir da fórmula:  Y - Y1 = m . (X - X1)       **
+            ** De onde:  Y = mX - mX1 -(-Y1) --> Y = mX -mX1 + Y1                           **
+            ** logo, Y = mX + k, onde k = -mX1 + Y1                                         **
+            *********************************************************************************/
             float k = -m * x1 + y1;
 
             // Seta o ponto de teste que será utilizado para saber se colide com alguma parede
