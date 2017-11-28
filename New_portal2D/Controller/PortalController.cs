@@ -10,11 +10,62 @@ namespace Portal2D.Controller
     class PortalController
     {
         public void CollisionWithPlayer(GameTime gameTime, Player player, Portal entryPortal, Portal exitPortal)
-
         {
+            
+            // Segunda tentativa
+            if(player.Bounds.Intersects(entryPortal.Bounds)) //Colidindo com o portal de entrada
+            {
+
+                if(Math.Sign(player.Movement.X) > 0) //Player indo para a direita
+                    player.Position = new Vector2(exitPortal.Position.X + 64 , exitPortal.Position.Y);
+                
+                else if (Math.Sign(player.Movement.X) < 0) //Player indo para a esquerda
+                    player.Position = new Vector2(exitPortal.Position.X - 64 , exitPortal.Position.Y);
+                
+                else
+                {
+
+                    if(Math.Sign(player.Movement.Y) > 0) //Player caindo
+                        player.Position = new Vector2(exitPortal.Position.X, exitPortal.Position.Y + 64);
+                
+                    else if (Math.Sign(player.Movement.X) < 0) //Player pulando
+                        player.Position = new Vector2(exitPortal.Position.X, exitPortal.Position.Y - 64);
+
+                }
+
+            }
+            
+            
+            if(player.Bounds.Intersects(exitPortal.Bounds)) //Colidindo com o portal de saida
+            {
+
+                if(Math.Sign(player.Movement.X) > 0) //Player indo para a direita
+                    player.Position = new Vector2(entryPortal.Position.X + 64 , entryPortal.Position.Y);
+                
+                else if (Math.Sign(player.Movement.X) < 0) //Player indo para a esquerda
+                    player.Position = new Vector2(entryPortal.Position.X - 64 , entryPortal.Position.Y);
+                
+                else
+                {
+
+                    if(Math.Sign(player.Movement.Y) > 0) //Player caindo
+                        player.Position = new Vector2(entryPortal.Position.X, entryPortal.Position.Y + 64);
+                
+                    else if (Math.Sign(player.Movement.X) < 0) //Player indo para a esquerda
+                        player.Position = new Vector2(entryPortal.Position.X, entryPortal.Position.Y - 64);
+
+                }
+
+            }
+            
+            
+            
+            
+            
+            /* Primeira Tentativa
             // A parte comentada dentro do IF é para quando o portal não for instanciado.
             // Se estiver colidindo com o portal de entrada
-            if (player.Bounds.Intersects(entryPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& exitPortal.GetPortalMoved == true*/)
+            if (player.Bounds.Intersects(entryPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& exitPortal.GetPortalMoved == true)
             {
                 player.Position = new Vector2(576, 64);
                     //new Vector2 (exitPortal.GetPortalPosition.X + (Math.Sign(player.Movement.X) * exitPortal.Texture.Width) + Math.Sign(player.Movement.X),
@@ -28,7 +79,7 @@ namespace Portal2D.Controller
             }
 
             // Se estiver colidindo com o portal de saida
-            if (player.Bounds.Intersects(exitPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& entryPortal.GetPortalMoved == true*/)
+            if (player.Bounds.Intersects(exitPortal.Bounds) && Math.Sign(player.Movement.X) != 0 /*&& entryPortal.GetPortalMoved == true)
             {
 
                 player.Position = new Vector2(entryPortal.GetPortalPosition.X + (Math.Sign(player.Movement.X) * player.Texture.Width) + Math.Sign(player.Movement.X),
@@ -39,7 +90,7 @@ namespace Portal2D.Controller
             {
                 player.Position = new Vector2(entryPortal.GetPortalPosition.X,
                         entryPortal.GetPortalPosition.Y + Math.Sign(player.Movement.Y) + Math.Sign(player.Movement.Y) * player.Texture.Height);
-            }
+            }*/
             
 
         }
