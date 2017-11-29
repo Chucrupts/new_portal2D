@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace New_portal2D.Content
+namespace New_Portal2D.Models
 {
     class Tile : Sprite
     {

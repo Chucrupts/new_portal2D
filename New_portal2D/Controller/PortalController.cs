@@ -1,11 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Portal2D.Models;
-using Microsoft.Xna.Framework.Input;
-using Portal2D.Util;
-using New_portal2D.Content;
+using New_Portal2D.Models;
 
-namespace Portal2D.Controller
+
+namespace New_Portal2D.Controller
 {
     class PortalController
     {
@@ -100,7 +98,7 @@ namespace Portal2D.Controller
 
         /* A função abaixo cria a reta entre o centro do player e o ponto onde ele clicou e****
         ** posteriormente checa se esta reta colide com alguma parede, para instaciar o portal*/
-        public void CollisionWithWall(Player player, Wall[] wall, Portal portal)
+        /*public void CollisionWithWall(Player player, Wall[] wall, Portal portal)
 
         {
 
@@ -139,7 +137,7 @@ namespace Portal2D.Controller
             ** De onde:  Y = mX - mX1 -(-Y1) --> Y = mX -mX1 + Y1                           **
             ** logo, Y = mX + k, onde k = -mX1 + Y1                                         **
             *********************************************************************************/
-            float k = -m * x1 + y1;
+            /*float k = -m * x1 + y1;
 
             // Seta o ponto de teste que será utilizado para saber se colide com alguma parede
             Point testPoint = new Point(0,0);
@@ -170,7 +168,7 @@ namespace Portal2D.Controller
                 CollisionWithWall(player, wall, exitPortal);
                     // Alterar a posição do portal de saída
             }
-        }
+        }*/
 
     }
 }

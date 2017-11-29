@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace New_portal2D
+namespace New_Portal2D.Models
 {
     class Sprite
     {

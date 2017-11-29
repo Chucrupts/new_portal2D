@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using New_portal2D.Content;
+﻿/*using Microsoft.Xna.Framework;
+using New_Portal2D.Models;
 
 namespace Portal2D.Util
 {
@@ -49,4 +49,4 @@ namespace Portal2D.Util
         }        
 
     }
-}
+}*/

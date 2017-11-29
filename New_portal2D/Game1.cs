@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using New_portal2D.Content;
-using Portal2D.Models;
-using Portal2D.Controller;
+using New_Portal2D.Models;
+using New_Portal2D.Controller;
 
 namespace New_portal2D
 {

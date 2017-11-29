@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace New_portal2D.Content
+namespace New_Portal2D.Models
 {
     class Player : Sprite
     {

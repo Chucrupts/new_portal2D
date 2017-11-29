@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using New_portal2D.Content;
+using New_portal2D.Util;
 
-namespace New_portal2D
+namespace New_Portal2D.Models
 {
     class Board
     {

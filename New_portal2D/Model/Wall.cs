@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using New_portal2D;
@@ -57,7 +57,7 @@ namespace Portal2D.Models
         { }
 
 
-        public void Initialize(Vector2 wallPosition,Boolean portable, Boolean solid)
+        public void Initialize(Vector2 wallPosition, Boolean portable, Boolean solid)
 
         {
             SetWallPosition(wallPosition);
@@ -83,4 +83,4 @@ namespace Portal2D.Models
 
 
     }
-}
+}*/

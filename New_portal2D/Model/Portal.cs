@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using New_portal2D;
 
-namespace Portal2D.Models
+namespace New_Portal2D.Models
 {
     class Portal : Sprite
     {

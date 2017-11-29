@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace New_portal2D
+namespace New_portal2D.Util
 {
     public struct MovementWrapper
     {
