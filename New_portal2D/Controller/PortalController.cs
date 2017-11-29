@@ -28,7 +28,7 @@ namespace Portal2D.Controller
                     if(Math.Sign(player.Movement.Y) > 0) //Player caindo
                         player.Position = new Vector2(exitPortal.Position.X, exitPortal.Position.Y + 64);
                 
-                    else if (Math.Sign(player.Movement.X) < 0) //Player pulando
+                    else if (Math.Sign(player.Movement.Y) < 0) //Player pulando
                         player.Position = new Vector2(exitPortal.Position.X, exitPortal.Position.Y - 64);
 
                 }
@@ -51,7 +51,7 @@ namespace Portal2D.Controller
                     if(Math.Sign(player.Movement.Y) > 0) //Player caindo
                         player.Position = new Vector2(entryPortal.Position.X, entryPortal.Position.Y + 64);
                 
-                    else if (Math.Sign(player.Movement.X) < 0) //Player indo para a esquerda
+                    else if (Math.Sign(player.Movement.Y) < 0) //Player indo para a esquerda
                         player.Position = new Vector2(entryPortal.Position.X, entryPortal.Position.Y - 64);
 
                 }
