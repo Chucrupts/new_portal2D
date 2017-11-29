@@ -34,13 +34,15 @@ namespace New_portal2D
             MouseState mouseState = Mouse.GetState();
             // Cria novo SpriteBatch, para desenhar texturas
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Desenha texturas do player e parede
+            // Carrega texturas
             _wallTexture = Content.Load<Texture2D>("wall_2");
             _playerTexture = Content.Load<Texture2D>("player_2");
             _backTexture = Content.Load<Texture2D>("back");
             _portal_2Texture = Content.Load<Texture2D>("portal_2");
             _portal_1Texture = Content.Load<Texture2D>("portal_1");
+
             //_sprite = new Sprite(_playerTexture, new Vector2(mouseState.X, mouseState.Y), _spriteBatch);
+            //Constroi os objetos do game
             _back = new Board(_spriteBatch, _backTexture, 15, 10, true);
             _board = new Board(_spriteBatch, _wallTexture, 15, 10);
             entryPortal = new Portal(_portal_2Texture, new Vector2(192, 512), _spriteBatch, false);

@@ -26,7 +26,8 @@ namespace New_Portal2D.Models
             Board.CurrentBoard = this;
         }
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, int columns, int rows, Boolean zoas)
+        // Construtor do background a otimizar
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, int columns, int rows, Boolean isBack)
         {
             Columns = columns;
             Rows = rows;
@@ -45,19 +46,23 @@ namespace New_Portal2D.Models
             }
         }
 
+        // Cria novo board
         public void CreateNewBoard()
         {
-            InitializeAllTilesAndBlockSomeRandomly();
-            SetAllBorderTilesBlocked();
-            SetTopLeftTileUnblocked();
+            TilesAndBlocksRandom();
+            SetBorder();
+            SetTilesUnblocked();
         }
 
-        private void SetTopLeftTileUnblocked()
+        // Cria tiles vazios
+        private void SetTilesUnblocked()
         {
+            //Tile Player
             Tiles[1, 1].IsBlocked = false;
             Tiles[2, 1].IsBlocked = false;
             Tiles[1, 2].IsBlocked = false;
             Tiles[2, 2].IsBlocked = false;
+
             Tiles[3, 8].IsBlocked = false; // Tile entryPortal
             Tiles[10, 1].IsBlocked = false; // Tile exitPortal
             Tiles[2, 7].IsBlocked = false;  // 5 Tiles em volta do entryPortal
@@ -72,7 +77,8 @@ namespace New_Portal2D.Models
             Tiles[11, 2].IsBlocked = false;
         }
 
-        private void InitializeAllTilesAndBlockSomeRandomly()
+        // Randomizando
+        private void TilesAndBlocksRandom()
         {
             for (int x = 0; x < Columns; x++)
             {
@@ -84,7 +90,8 @@ namespace New_Portal2D.Models
             }
         }
 
-        private void SetAllBorderTilesBlocked()
+        // Setando bordas
+        private void SetBorder()
         {
             for (int x = 0; x < Columns; x++)
             {
@@ -95,7 +102,7 @@ namespace New_Portal2D.Models
                 }
             }
         }
-
+        // === DRAW ===
         public void Draw()
         {
             foreach (var tile in Tiles)
@@ -104,6 +111,7 @@ namespace New_Portal2D.Models
             }
         }
 
+        // Retorna falso se existe colisão entre obj parametro e tiles.isblocked=true
         public bool HasRoomForRectangle(Rectangle rectangleToCheck)
         {
             foreach (var tile in Tiles)
@@ -116,7 +124,8 @@ namespace New_Portal2D.Models
             return true;
         }
 
-        public Vector2 WhereCanIGetTo(Vector2 originalPosition, Vector2 destination, Rectangle boundingRectangle)
+        // Até onde o player pode ir
+        public Vector2 WherePlayerCanGetTo(Vector2 originalPosition, Vector2 destination, Rectangle boundingRectangle)
         {
             MovementWrapper move = new MovementWrapper(originalPosition, destination, boundingRectangle);
 
@@ -150,11 +159,11 @@ namespace New_Portal2D.Models
 
                 Vector2 remainingHorizontalMovement = wrapper.OneStep.X * Vector2.UnitX * stepsLeft;
                 wrapper.FurthestAvailableLocationSoFar =
-                    WhereCanIGetTo(wrapper.FurthestAvailableLocationSoFar, wrapper.FurthestAvailableLocationSoFar + remainingHorizontalMovement, wrapper.BoundingRectangle);
+                    WherePlayerCanGetTo(wrapper.FurthestAvailableLocationSoFar, wrapper.FurthestAvailableLocationSoFar + remainingHorizontalMovement, wrapper.BoundingRectangle);
 
                 Vector2 remainingVerticalMovement = wrapper.OneStep.Y * Vector2.UnitY * stepsLeft;
                 wrapper.FurthestAvailableLocationSoFar =
-                    WhereCanIGetTo(wrapper.FurthestAvailableLocationSoFar, wrapper.FurthestAvailableLocationSoFar + remainingVerticalMovement, wrapper.BoundingRectangle);
+                    WherePlayerCanGetTo(wrapper.FurthestAvailableLocationSoFar, wrapper.FurthestAvailableLocationSoFar + remainingVerticalMovement, wrapper.BoundingRectangle);
             }
 
             return wrapper.FurthestAvailableLocationSoFar;

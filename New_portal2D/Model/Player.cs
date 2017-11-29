@@ -45,7 +45,7 @@ namespace New_Portal2D.Models
         {
             oldPosition = Position;
             UpdatePositionBasedOnMovement(gameTime);
-            Position = Board.CurrentBoard.WhereCanIGetTo(oldPosition, Position, Bounds);
+            Position = Board.CurrentBoard.WherePlayerCanGetTo(oldPosition, Position, Bounds);
         }
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)

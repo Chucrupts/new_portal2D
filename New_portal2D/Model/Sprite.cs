@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace New_Portal2D.Models
 {
-    class Sprite
+    public abstract class Sprite
     {
         // Váriaveis de textura e posição
         public Vector2 Position { get; set; }
