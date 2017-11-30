@@ -14,8 +14,9 @@ namespace New_portal2D
         private Texture2D _wallTexture, _playerTexture, _backTexture, _portal_1Texture, _portal_2Texture;
         private Board _board, _back;
         private Player _player;
-        private Portal entryPortal, exitPortal;
-        private PortalController pc;
+        private Portal _entryPortal, _exitPortal;
+        private PortalController _portalController;
+        private PlayerController _playerController;
 
         public Game1()
         {
@@ -45,18 +46,19 @@ namespace New_portal2D
             //Constroi os objetos do game
             _back = new Board(_spriteBatch, _backTexture, 15, 10, true);
             _board = new Board(_spriteBatch, _wallTexture, 15, 10);
-            entryPortal = new Portal(_portal_2Texture, new Vector2(192, 512), _spriteBatch, false);
-            exitPortal = new Portal(_portal_1Texture, new Vector2(640, 64), _spriteBatch, true);
+            _entryPortal = new Portal(_portal_2Texture, new Vector2(192, 512), _spriteBatch, false);
+            _exitPortal = new Portal(_portal_1Texture, new Vector2(640, 64), _spriteBatch, true);
             _player = new Player(_playerTexture, new Vector2(80, 80), _spriteBatch);
-            pc = new PortalController();
+            _portalController = new PortalController();
+            _playerController = new PlayerController();
         }
 
         // === UPDATE ===
         protected override void Update(GameTime gameTime)
         {
             // Player update
-            _player.Update(gameTime);
-            pc.CollisionWithPlayer(gameTime, _player, entryPortal, exitPortal);
+            _playerController.Update(gameTime, _player);
+            _portalController.CollisionWithPlayer(gameTime, _player, _entryPortal, _exitPortal);
             base.Update(gameTime);
             CheckKeyboard();
         }
@@ -93,8 +95,8 @@ namespace New_portal2D
             //_sprite.Draw();
             _back.Draw();
             _board.Draw();
-            entryPortal.Draw();
-            exitPortal.Draw();
+            _entryPortal.Draw();
+            _exitPortal.Draw();
             _player.Draw();
             _spriteBatch.End();
         }

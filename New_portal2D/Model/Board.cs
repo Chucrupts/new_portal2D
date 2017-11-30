@@ -54,28 +54,7 @@ namespace New_Portal2D.Models
             SetTilesUnblocked();
         }
 
-        // Cria tiles vazios
-        private void SetTilesUnblocked()
-        {
-            //Tile Player
-            Tiles[1, 1].IsBlocked = false;
-            Tiles[2, 1].IsBlocked = false;
-            Tiles[1, 2].IsBlocked = false;
-            Tiles[2, 2].IsBlocked = false;
 
-            Tiles[3, 8].IsBlocked = false; // Tile entryPortal
-            Tiles[10, 1].IsBlocked = false; // Tile exitPortal
-            Tiles[2, 7].IsBlocked = false;  // 5 Tiles em volta do entryPortal
-            Tiles[2, 8].IsBlocked = false;
-            Tiles[3, 7].IsBlocked = false;
-            Tiles[4, 7].IsBlocked = false;
-            Tiles[4, 8].IsBlocked = false;
-            Tiles[9, 1].IsBlocked = false; //5 Tiles em volta do exitPortal
-            Tiles[9, 2].IsBlocked = false;
-            Tiles[10, 2].IsBlocked = false;
-            Tiles[11, 1].IsBlocked = false;
-            Tiles[11, 2].IsBlocked = false;
-        }
 
         // Randomizando
         private void TilesAndBlocksRandom()
@@ -102,16 +81,7 @@ namespace New_Portal2D.Models
                 }
             }
         }
-        // === DRAW ===
-        public void Draw()
-        {
-            foreach (var tile in Tiles)
-            {
-                tile.Draw();
-            }
-        }
 
-        // Retorna falso se existe colisão entre obj parametro e tiles.isblocked=true
         public bool HasRoomForRectangle(Rectangle rectangleToCheck)
         {
             foreach (var tile in Tiles)
@@ -168,6 +138,46 @@ namespace New_Portal2D.Models
 
             return wrapper.FurthestAvailableLocationSoFar;
         }
+
+        // Cria tiles vazios
+        public void SetTilesUnblocked()
+        {
+            //Tile Player
+            Tiles[1, 1].IsBlocked = false;
+            Tiles[2, 1].IsBlocked = false;
+            Tiles[1, 2].IsBlocked = false;
+            Tiles[2, 2].IsBlocked = false;
+            {
+                Tiles[3, 8].IsBlocked = false; // Tile entryPortal
+                Tiles[10, 1].IsBlocked = false;
+            } // Tiles dos portais
+            {
+                Tiles[2, 7].IsBlocked = false;  // 5 Tiles em volta do entryPortal
+                Tiles[2, 8].IsBlocked = false;
+                Tiles[3, 7].IsBlocked = false;
+                Tiles[4, 7].IsBlocked = false;
+                Tiles[4, 8].IsBlocked = false;
+            } // Tiles que envolvem o portal de entrada
+            {
+                Tiles[9, 1].IsBlocked = false; //5 Tiles em volta do exitPortal
+                Tiles[9, 2].IsBlocked = false;
+                Tiles[10, 2].IsBlocked = false;
+                Tiles[11, 1].IsBlocked = false;
+                Tiles[11, 2].IsBlocked = false;
+            } // Tiles que envolvem o portal de saida
+        }
+
+        // === DRAW ===
+        public void Draw()
+        {
+            foreach (var tile in Tiles)
+            {
+                tile.Draw();
+            }
+        }
+
+        // Retorna falso se existe colisão entre obj parametro e tiles.isblocked=true
+       
     }
 }
 
